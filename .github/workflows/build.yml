@@ -1,0 +1,28 @@
+name: Build Smooth Level Enter 2.2074
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Build Windows Geode mod
+        id: build
+        uses: geode-sdk/build-geode-mod@main
+        with:
+          sdk: given
+          target: Win64
+
+      - name: Upload finished .geode
+        uses: actions/upload-artifact@v4
+        with:
+          name: Smooth-Level-Enter-2.2074
+          path: ${{ steps.build.outputs.build-output }}
